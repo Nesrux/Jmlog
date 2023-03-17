@@ -6,10 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cliente {
@@ -24,7 +26,7 @@ public class Cliente {
 	@Column(nullable = false)
 	private String email;
 
-	@Column(name = "fone", nullable = false)
+	@Column(name = "fone")
 	private String telefone;
 
 }

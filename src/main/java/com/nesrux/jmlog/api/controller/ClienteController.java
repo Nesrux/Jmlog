@@ -17,7 +17,7 @@ public class ClienteController {
 
 	@GetMapping("/clientes")
 	public List<Cliente> listar() {
-		return menager.createQuery("from cliente", Cliente.class)
+		return menager.createQuery("from Cliente", Cliente.class)
 				.getResultList();
 	}
 }
