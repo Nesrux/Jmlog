@@ -3,16 +3,38 @@ package com.nesrux.jmlog.domain.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Entrega {
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
+public class Entrega {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Long id;
 
+	@ManyToOne
 	private Cliente cliente;
 
+	@Embedded
 	private Destinatario destinatario;
 
 	private BigDecimal taxa;
 
+	@Enumerated(EnumType.STRING)
 	private StatusEntraga status;
 
 	private LocalDateTime dataPedido;
