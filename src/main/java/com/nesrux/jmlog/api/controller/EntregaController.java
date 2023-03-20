@@ -16,7 +16,10 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/entregas")
 public class EntregaController {
+
 	private SolicitacaoEntregaService solicitacaoEntregaService;
+
+
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
