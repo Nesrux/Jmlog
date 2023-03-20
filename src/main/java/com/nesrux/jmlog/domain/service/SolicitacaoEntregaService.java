@@ -6,11 +6,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.nesrux.jmlog.domain.exception.NegocioException;
 import com.nesrux.jmlog.domain.model.Cliente;
 import com.nesrux.jmlog.domain.model.Entrega;
 import com.nesrux.jmlog.domain.model.StatusEntraga;
-import com.nesrux.jmlog.domain.repository.ClienteRepository;
 import com.nesrux.jmlog.domain.repository.EntregaRepository;
 
 import lombok.AllArgsConstructor;
@@ -20,12 +18,11 @@ import lombok.AllArgsConstructor;
 public class SolicitacaoEntregaService {
 
 	private EntregaRepository entregaRespository;
-	private ClienteRepository clienteRepository;
+	private CatalogoClienteService catalogoClienteService;
 
 	@Transactional
 	public Entrega solicitar(Entrega entrega) {
-		Cliente cliente = clienteRepository.findById(entrega.getCliente().getId())
-				.orElseThrow(() -> new NegocioException("Cliente nao encontrado"));
+		Cliente cliente = catalogoClienteService.buscar(entrega.getCliente().getId());
 		
 		entrega.setCliente(cliente);
 		entrega.setStatus(StatusEntraga.PENDENTE);
