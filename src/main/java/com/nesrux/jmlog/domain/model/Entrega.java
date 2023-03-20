@@ -32,7 +32,6 @@ public class Entrega {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
-	
 	private Long id;
 	
 	@ConvertGroup(from = Default.class, to = ValidationGrups.ClienteID.class)
@@ -41,6 +40,8 @@ public class Entrega {
 	@ManyToOne
 	private Cliente cliente;
 
+	@NotNull
+	@Valid
 	@Embedded
 	private Destinatario destinatario;
 
