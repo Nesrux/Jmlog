@@ -18,6 +18,6 @@ public class EntregaModel {
 	private BigDecimal taxa;
 	private StatusEntraga status;
 	private OffsetDateTime dataPedido;
-	private OffsetDateTime dataFinalizacap;
+	private OffsetDateTime dataFinalizacao;
 
 }
