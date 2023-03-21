@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.nesrux.jmlog.api.model.EntregaModel;
+import com.nesrux.jmlog.api.model.in.EntregaInputModel;
 import com.nesrux.jmlog.domain.model.Entrega;
 
 import lombok.AllArgsConstructor;
@@ -23,5 +24,9 @@ public class EntregaAssembler {
 
 	public List<EntregaModel> toCollectionModel(List<Entrega> entregas) {
 		return entregas.stream().map(this::toModel).collect(Collectors.toList());
+	}
+
+	public Entrega toEntity(EntregaInputModel entregaInput) {
+		return mapper.map(entregaInput, Entrega.class);
 	}
 }

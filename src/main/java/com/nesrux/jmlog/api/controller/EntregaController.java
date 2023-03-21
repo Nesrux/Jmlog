@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmlog.api.assembler.EntregaAssembler;
 import com.nesrux.jmlog.api.model.EntregaModel;
+import com.nesrux.jmlog.api.model.in.EntregaInputModel;
 import com.nesrux.jmlog.domain.model.Entrega;
 import com.nesrux.jmlog.domain.repository.EntregaRepository;
 import com.nesrux.jmlog.domain.service.SolicitacaoEntregaService;
@@ -32,8 +33,10 @@ public class EntregaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public EntregaModel solicitar(@Valid @RequestBody Entrega entrega) {
-		Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(entrega);
+	public EntregaModel solicitar(@Valid @RequestBody EntregaInputModel entregaInput) {
+		Entrega novaEntrega = entregaAssembler.toEntity(entregaInput);
+		Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(novaEntrega);
+		
 		return entregaAssembler.toModel(entregaSolicitada);
 	}
 
