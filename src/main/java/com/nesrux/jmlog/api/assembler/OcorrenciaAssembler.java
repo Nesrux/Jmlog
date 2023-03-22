@@ -1,5 +1,8 @@
 package com.nesrux.jmlog.api.assembler;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -17,4 +20,7 @@ public class OcorrenciaAssembler {
 		return mapper.map(ocorrencia, OcorrenciaModel.class);
 	}
 
+	public List<OcorrenciaModel> toCollectionModel(List<Ocorrencia> ocorrencias) {
+		return ocorrencias.stream().map(this::toModel).collect(Collectors.toList());
+	}
 }
