@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,6 +20,7 @@ import com.nesrux.jmlog.api.model.EntregaModel;
 import com.nesrux.jmlog.api.model.in.EntregaInputModel;
 import com.nesrux.jmlog.domain.model.Entrega;
 import com.nesrux.jmlog.domain.repository.EntregaRepository;
+import com.nesrux.jmlog.domain.service.FinalizacaoEntregaService;
 import com.nesrux.jmlog.domain.service.SolicitacaoEntregaService;
 
 import lombok.AllArgsConstructor;
@@ -30,13 +32,14 @@ public class EntregaController {
 	private EntregaAssembler entregaAssembler;
 	private EntregaRepository entregaRepository;
 	private SolicitacaoEntregaService solicitacaoEntregaService;
+	private FinalizacaoEntregaService entregaService;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public EntregaModel solicitar(@Valid @RequestBody EntregaInputModel entregaInput) {
 		Entrega novaEntrega = entregaAssembler.toEntity(entregaInput);
 		Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(novaEntrega);
-		
+
 		return entregaAssembler.toModel(entregaSolicitada);
 	}
 
@@ -50,6 +53,12 @@ public class EntregaController {
 		return entregaRepository.findById(entregaId).map(entrega -> {
 			return ResponseEntity.ok(entregaAssembler.toModel(entrega));
 		}).orElse(ResponseEntity.notFound().build());
+	}
+
+	@PutMapping("/{entregaId}/finalizacao")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void finalizar(@PathVariable Long entregaId) {
+		entregaService.finalizar(entregaId);
 	}
 
 }
