@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.nesrux.jmlog.domain.exception.NegocioException;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,9 +54,27 @@ public class Entrega {
 		ocorrencia.setDescricao(descricao);
 		ocorrencia.setDataRegistro(OffsetDateTime.now());
 		ocorrencia.setEntrega(this);
-		
+
 		this.getOcorrencias().add(ocorrencia);
-		
+
 		return ocorrencia;
 	}
+
+	public void finalizar() {
+		if (naoSerFinalizada()) {
+			throw new NegocioException("Entrega não pode ser finalizada");
+		}
+		setStatus(StatusEntraga.FInalizada);
+		setDataFinalizacao(OffsetDateTime.now());
+
+	}
+
+	public boolean podeSerFinalizada() {
+		return StatusEntraga.PENDENTE.equals(getStatus());
+	}
+
+	public boolean naoSerFinalizada() {
+		return !StatusEntraga.PENDENTE.equals(getStatus());
+	}
+
 }
