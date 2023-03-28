@@ -75,4 +75,4 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-[⬆ Voltar ao topo](https://github.com/Nesrux/Jmlog/edit/main/README.md)<br>
+[⬆ Voltar ao topo](https://github.com/Nesrux/Jmlog)<br>
