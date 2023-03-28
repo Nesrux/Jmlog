@@ -71,11 +71,6 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     <td align="center">
 </table>
 
-
-## 😄 Seja um dos contribuidores<br>
-
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
-
 ## 📝 Licença
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
